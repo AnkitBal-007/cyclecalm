@@ -1,150 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="A personal period, ovulation, and PMS calendar. Track your cycle with calendar-based estimates — no account, no server, data stays in your browser."
-    />
-    <title>CycleCalm — Period, Ovulation &amp; PMS Calendar</title>
-    <link rel="stylesheet" href="css/styles.css" />
-  </head>
-  <body>
-    <!-- ===== HEADER ===== -->
-    <header class="site-header">
-      <h1 class="site-title">🌸 CycleCalm</h1>
-      <p class="site-tagline">Your personal cycle calendar</p>
-    </header>
 
-    <!-- ===== MAIN CONTENT ===== -->
-    <main id="app-root">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="A personal period, ovulation, and PMS calendar. Track your cycle with calendar-based estimates — no account, no server, data stays in your browser." />
+  <title>Bloom — Period, Ovulation &amp; PMS Calendar</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
 
-      <!-- ===== INPUT FORM ===== -->
-      <section class="input-card" aria-labelledby="form-heading">
-        <h2 id="form-heading" class="input-card__title">Enter your cycle details</h2>
+<body>
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <h1 class="site-title">🌸 Bloom</h1>
+    <p class="site-tagline">Your personal cycle calendar</p>
+  </header>
 
-        <form id="cycle-form" novalidate>
+  <!-- ===== MAIN CONTENT ===== -->
+  <main id="app-root">
 
-          <!-- Last period start -->
-          <div class="field-group">
-            <label class="field-label" for="last-period">
-              First day of last period
-              <span class="field-required" aria-hidden="true">*</span>
-            </label>
-            <input
-              type="date"
-              id="last-period"
-              name="lastPeriodStart"
-              class="field-input"
-              required
-              aria-required="true"
-              aria-describedby="last-period-error"
-            />
-            <span
-              id="last-period-error"
-              class="field-error"
-              role="alert"
-              aria-live="polite"
-            ></span>
-          </div>
+    <!-- ===== INPUT FORM ===== -->
+    <section class="input-card" aria-labelledby="form-heading">
+      <h2 id="form-heading" class="input-card__title">Enter your cycle details</h2>
 
-          <!-- Cycle length -->
-          <div class="field-group">
-            <label class="field-label" for="cycle-length">
-              Average cycle length
-              <span class="field-unit">(days)</span>
-            </label>
-            <input
-              type="number"
-              id="cycle-length"
-              name="cycleLength"
-              class="field-input field-input--short"
-              value="28"
-              min="21"
-              max="45"
-              aria-describedby="cycle-length-hint cycle-length-error"
-            />
-            <span id="cycle-length-hint" class="field-hint">Typical range: 21–45 days</span>
-            <span
-              id="cycle-length-error"
-              class="field-error"
-              role="alert"
-              aria-live="polite"
-            ></span>
-          </div>
+      <form id="cycle-form" novalidate>
 
-          <!-- Period length -->
-          <div class="field-group">
-            <label class="field-label" for="period-length">
-              Average period length
-              <span class="field-unit">(days)</span>
-            </label>
-            <input
-              type="number"
-              id="period-length"
-              name="periodLength"
-              class="field-input field-input--short"
-              value="5"
-              min="2"
-              max="10"
-              aria-describedby="period-length-hint period-length-error"
-            />
-            <span id="period-length-hint" class="field-hint">Typical range: 2–10 days</span>
-            <span
-              id="period-length-error"
-              class="field-error"
-              role="alert"
-              aria-live="polite"
-            ></span>
-          </div>
-
-          <button type="submit" id="calculate-btn" class="btn-calculate">
-            Calculate my cycle
-          </button>
-
-          <p class="privacy-note">
-            🔒 Everything stays in this browser — nothing is ever sent to a server.
-          </p>
-
-          <button type="button" id="clear-data-btn" class="btn-clear">
-            Clear saved data
-          </button>
-
-        </form>
-      </section>
-
-      <!-- ===== CALENDAR ===== -->
-      <section
-        id="calendar-section"
-        class="calendar-section hidden"
-        aria-labelledby="calendar-heading"
-      >
-        <h2 id="calendar-heading" class="calendar-section__heading">Your cycle calendar</h2>
-
-        <div class="cal-layout">
-          <!-- Calendar grid (filled by calendar.js) -->
-          <div id="calendar-container" class="cal-layout__grid"></div>
-
-          <!-- Info panel (filled by calendar.js) -->
-          <aside id="info-panel" class="cal-layout__info" aria-label="Cycle overview"></aside>
+        <!-- Last period start -->
+        <div class="field-group">
+          <label class="field-label" for="last-period">
+            First day of last period
+            <span class="field-required" aria-hidden="true">*</span>
+          </label>
+          <input type="date" id="last-period" name="lastPeriodStart" class="field-input" required aria-required="true"
+            aria-describedby="last-period-error" />
+          <span id="last-period-error" class="field-error" role="alert" aria-live="polite"></span>
         </div>
-      </section>
+
+        <!-- Cycle length -->
+        <div class="field-group">
+          <label class="field-label" for="cycle-length">
+            Average cycle length
+            <span class="field-unit">(days)</span>
+          </label>
+          <input type="number" id="cycle-length" name="cycleLength" class="field-input field-input--short" value="28"
+            min="21" max="45" aria-describedby="cycle-length-hint cycle-length-error" />
+          <span id="cycle-length-hint" class="field-hint">Typical range: 21–45 days</span>
+          <span id="cycle-length-error" class="field-error" role="alert" aria-live="polite"></span>
+        </div>
+
+        <!-- Period length -->
+        <div class="field-group">
+          <label class="field-label" for="period-length">
+            Average period length
+            <span class="field-unit">(days)</span>
+          </label>
+          <input type="number" id="period-length" name="periodLength" class="field-input field-input--short" value="5"
+            min="2" max="10" aria-describedby="period-length-hint period-length-error" />
+          <span id="period-length-hint" class="field-hint">Typical range: 2–10 days</span>
+          <span id="period-length-error" class="field-error" role="alert" aria-live="polite"></span>
+        </div>
+
+        <button type="submit" id="calculate-btn" class="btn-calculate">
+          Calculate my cycle
+        </button>
+
+        <p class="privacy-note">
+          🔒 Everything stays in this browser — nothing is ever sent to a server.
+        </p>
+
+        <button type="button" id="clear-data-btn" class="btn-clear">
+          Clear saved data
+        </button>
+
+      </form>
+    </section>
+
+    <!-- ===== CALENDAR ===== -->
+    <section id="calendar-section" class="calendar-section hidden" aria-labelledby="calendar-heading">
+      <h2 id="calendar-heading" class="calendar-section__heading">Your cycle calendar</h2>
+
+      <div class="cal-layout">
+        <!-- Calendar grid (filled by calendar.js) -->
+        <div id="calendar-container" class="cal-layout__grid"></div>
+
+        <!-- Info panel (filled by calendar.js) -->
+        <aside id="info-panel" class="cal-layout__info" aria-label="Cycle overview"></aside>
+      </div>
+    </section>
 
 
-    </main>
+  </main>
 
-    <!-- ===== FOOTER ===== -->
-    <footer class="site-footer">
-      <p class="disclaimer">
-        ⚠️ These are calendar-based estimates only and are <strong>not medical advice</strong>.
-        This app is <strong>not a reliable method of contraception</strong>.
-        Please consult a healthcare professional for medical guidance.
-      </p>
-    </footer>
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <p class="disclaimer">
+      These are calendar-based estimates only and are <strong>not medical advice</strong>.
+      This app is <strong>not a reliable method of contraception</strong>.
+      Please consult a healthcare professional for medical guidance.
+    </p>
+    <p class="copyright">
+      © 2026 Bloom. All rights reserved.
+    </p>
+    <p>
+      Made with care by Ankit.
+    </p>
+  </footer>
 
-    <script src="js/cycle-calculator.js"></script>
-    <script src="js/calendar.js"></script>
-    <script src="js/app.js"></script>
-  </body>
+  <script src="js/cycle-calculator.js"></script>
+  <script src="js/calendar.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
 </html>

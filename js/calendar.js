@@ -16,21 +16,21 @@
      ============================================================ */
 
   const MONTH_NAMES = [
-    "January","February","March","April","May","June",
-    "July","August","September","October","November","December",
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December",
   ];
 
-  const DAY_HEADERS = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  const DAY_HEADERS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   /* ============================================================
      MODULE STATE  (private to this IIFE)
      ============================================================ */
 
   let _containerId = null;
-  let _year        = null;
-  let _month       = null;      // 0-indexed
-  let _sets        = null;      // { period, fertile, peak, pms, ovulation }
-  let _cycleData   = null;      // full array from calculateCycles()
+  let _year = null;
+  let _month = null;      // 0-indexed
+  let _sets = null;      // { period, fertile, peak, pms, ovulation }
+  let _cycleData = null;      // full array from calculateCycles()
 
   /* ============================================================
      HELPERS — DATE MATHS
@@ -62,8 +62,8 @@
     const [y, m, d] = isoString.split("-").map(Number);
     return new Date(y, m - 1, d).toLocaleDateString("en-US", {
       month: "long",
-      day:   "numeric",
-      year:  "numeric",
+      day: "numeric",
+      year: "numeric",
     });
   }
 
@@ -77,7 +77,7 @@
     const [y1, m1, d1] = isoStart.split("-").map(Number);
     const [y2, m2, d2] = isoEnd.split("-").map(Number);
     const start = new Date(y1, m1 - 1, d1);
-    const end   = new Date(y2, m2 - 1, d2);
+    const end = new Date(y2, m2 - 1, d2);
 
     if (y1 === y2 && m1 === m2) {
       // "March 10–16, 2026"
@@ -142,17 +142,17 @@
    * Build Set-based lookups from calculateCycles() output for fast O(1) per-day lookup.
    */
   function buildSets(cycleData) {
-    const period    = new Set();
-    const fertile   = new Set();
-    const peak      = new Set();
-    const pms       = new Set();
+    const period = new Set();
+    const fertile = new Set();
+    const peak = new Set();
+    const pms = new Set();
     const ovulation = new Set();
 
     cycleData.forEach(function (cycle) {
-      cycle.periodDays.forEach(function (d)        { period.add(d); });
+      cycle.periodDays.forEach(function (d) { period.add(d); });
       cycle.fertileWindowDays.forEach(function (d) { fertile.add(d); });
-      cycle.peakDays.forEach(function (d)          { peak.add(d); });
-      cycle.pmsDays.forEach(function (d)            { pms.add(d); });
+      cycle.peakDays.forEach(function (d) { peak.add(d); });
+      cycle.pmsDays.forEach(function (d) { pms.add(d); });
       ovulation.add(cycle.ovulationDay);
     });
 
@@ -164,10 +164,10 @@
    * Priority: period > peak > fertile > pms > normal
    */
   function classifyDay(isoDate, sets) {
-    if (sets.period.has(isoDate))  return "period";
-    if (sets.peak.has(isoDate))    return "peak";
+    if (sets.period.has(isoDate)) return "period";
+    if (sets.peak.has(isoDate)) return "peak";
     if (sets.fertile.has(isoDate)) return "fertile";
-    if (sets.pms.has(isoDate))     return "pms";
+    if (sets.pms.has(isoDate)) return "pms";
     return "normal";
   }
 
@@ -192,7 +192,7 @@
         <h3 class="info-panel__title">Cycle ${cycle.cycleNumber} overview</h3>
 
         <div class="info-panel__row">
-          <span class="info-panel__icon" aria-hidden="true">📅</span>
+          <span class="info-panel__icon" aria-hidden="true"></span>
           <div>
             <div class="info-panel__label">Next period expected</div>
             <div class="info-panel__value">${formatDate(cycle.nextCycleStart)}</div>
@@ -200,7 +200,7 @@
         </div>
 
         <div class="info-panel__row">
-          <span class="info-panel__icon" aria-hidden="true">🥚</span>
+          <span class="info-panel__icon" aria-hidden="true"></span>
           <div>
             <div class="info-panel__label">Estimated ovulation</div>
             <div class="info-panel__value">${formatDate(cycle.ovulationDay)}</div>
@@ -208,7 +208,7 @@
         </div>
 
         <div class="info-panel__row">
-          <span class="info-panel__icon" aria-hidden="true">🌿</span>
+          <span class="info-panel__icon" aria-hidden="true"></span>
           <div>
             <div class="info-panel__label">Fertile window</div>
             <div class="info-panel__value">${formatDateRange(cycle.fertileWindowStart, cycle.fertileWindowEnd)}</div>
@@ -216,7 +216,7 @@
         </div>
 
         <div class="info-panel__row info-panel__row--peak">
-          <span class="info-panel__icon" aria-hidden="true">⭐</span>
+          <span class="info-panel__icon" aria-hidden="true"></span>
           <div>
             <div class="info-panel__label">Best days for conception</div>
             <div class="info-panel__value">${formatDateRange(cycle.peakDays[0], cycle.peakDays[1])}</div>
@@ -225,7 +225,7 @@
         </div>
 
         <div class="info-panel__row">
-          <span class="info-panel__icon" aria-hidden="true">🌙</span>
+          <span class="info-panel__icon" aria-hidden="true"></span>
           <div>
             <div class="info-panel__label">PMS window</div>
             <div class="info-panel__value">${formatDateRange(cycle.pmsStart, cycle.pmsEnd)}</div>
@@ -251,13 +251,13 @@
       return;
     }
 
-    const sets         = _sets;
-    const year         = _year;
-    const month        = _month;
-    const today        = todayISO();
+    const sets = _sets;
+    const year = _year;
+    const month = _month;
+    const today = todayISO();
     const firstWeekday = new Date(year, month, 1).getDay();    // 0 = Sun
-    const daysInMonth  = new Date(year, month + 1, 0).getDate();
-    const monthLabel   = `${MONTH_NAMES[month]} ${year}`;
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const monthLabel = `${MONTH_NAMES[month]} ${year}`;
 
     /* ----- Day-of-week header row ----- */
     const headerCells = DAY_HEADERS.map(function (name) {
@@ -271,21 +271,21 @@
 
     /* ----- Day cells ----- */
     const dayCells = Array.from({ length: daysInMonth }, function (_, i) {
-      const day  = i + 1;
-      const iso  = toISO(year, month, day);
+      const day = i + 1;
+      const iso = toISO(year, month, day);
       const type = classifyDay(iso, sets);
 
-      const isToday     = iso === today;
+      const isToday = iso === today;
       const isOvulation = sets.ovulation.has(iso);
-      const isPeak      = type === "peak";
+      const isPeak = type === "peak";
 
       // Human-readable label for screen readers
       const typeLabel = {
-        period:  "period day",
+        period: "period day",
         fertile: "fertile day",
-        peak:    isOvulation ? "ovulation day (peak)" : "peak fertile day",
-        pms:     "PMS window",
-        normal:  "",
+        peak: isOvulation ? "ovulation day (peak)" : "peak fertile day",
+        pms: "PMS window",
+        normal: "",
       }[type];
 
       const ariaLabel = [
@@ -396,10 +396,10 @@
     const startDate = new Date(cycleData[0].cycleStart + "T00:00:00");
 
     _containerId = containerId;
-    _year        = startDate.getFullYear();
-    _month       = startDate.getMonth();
-    _sets        = buildSets(cycleData);
-    _cycleData   = cycleData;
+    _year = startDate.getFullYear();
+    _month = startDate.getMonth();
+    _sets = buildSets(cycleData);
+    _cycleData = cycleData;
 
     render();
     renderInfoPanel();
