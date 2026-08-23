@@ -192,7 +192,7 @@
         <h3 class="info-panel__title">Cycle ${cycle.cycleNumber} overview</h3>
 
         <div class="info-panel__row">
-          <span class="info-panel__icon" aria-hidden="true"></span>
+          <span class="info-panel__icon" aria-hidden="true">🩸</span>
           <div>
             <div class="info-panel__label">Next period expected</div>
             <div class="info-panel__value">${formatDate(cycle.nextCycleStart)}</div>
@@ -200,7 +200,7 @@
         </div>
 
         <div class="info-panel__row">
-          <span class="info-panel__icon" aria-hidden="true"></span>
+          <span class="info-panel__icon" aria-hidden="true">🥚</span>
           <div>
             <div class="info-panel__label">Estimated ovulation</div>
             <div class="info-panel__value">${formatDate(cycle.ovulationDay)}</div>
@@ -208,7 +208,7 @@
         </div>
 
         <div class="info-panel__row">
-          <span class="info-panel__icon" aria-hidden="true"></span>
+          <span class="info-panel__icon" aria-hidden="true">🌱</span>
           <div>
             <div class="info-panel__label">Fertile window</div>
             <div class="info-panel__value">${formatDateRange(cycle.fertileWindowStart, cycle.fertileWindowEnd)}</div>
@@ -216,7 +216,7 @@
         </div>
 
         <div class="info-panel__row info-panel__row--peak">
-          <span class="info-panel__icon" aria-hidden="true"></span>
+          <span class="info-panel__icon" aria-hidden="true">🤰</span>
           <div>
             <div class="info-panel__label">Best days for conception</div>
             <div class="info-panel__value">${formatDateRange(cycle.peakDays[0], cycle.peakDays[1])}</div>
@@ -225,7 +225,7 @@
         </div>
 
         <div class="info-panel__row">
-          <span class="info-panel__icon" aria-hidden="true"></span>
+          <span class="info-panel__icon" aria-hidden="true">😣</span>
           <div>
             <div class="info-panel__label">PMS window</div>
             <div class="info-panel__value">${formatDateRange(cycle.pmsStart, cycle.pmsEnd)}</div>
