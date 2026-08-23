@@ -1,0 +1,719 @@
+/* ============================================================
+   CycleCalm — Base Stylesheet
+   Phase 1: CSS reset + basic typography only.
+   Colours, layout, and component styles added in later phases.
+   ============================================================ */
+
+/* ----- 1. Box-sizing reset ----- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ----- 2. Root / document defaults ----- */
+:root {
+  /* Typography scale */
+  --font-family-base: "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-size-base: 1rem;      /* 16px */
+  --line-height-base: 1.6;
+
+  /* Colour tokens */
+  --color-bg: #fdf8fb;
+  --color-text: #1a1a1a;
+  --color-muted: #6b7280;
+  --color-accent: #c97fa8;     /* soft rose */
+  --color-accent-dark: #7d3f6b;
+  --color-error: #b52626;
+}
+
+/* ----- 3. Base element styles ----- */
+html {
+  font-size: var(--font-size-base);
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family-base);
+  line-height: var(--line-height-base);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Images & media */
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+/* Lists */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Links */
+a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+/* ----- 4. Layout shell ----- */
+.site-header {
+  padding: 1.5rem 1rem;
+  text-align: center;
+  border-bottom: 1px solid #e8d5e3;
+  background: #fff;
+}
+
+.site-title {
+  font-size: 1.75rem;
+  color: var(--color-accent);
+}
+
+.site-tagline {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  margin-top: 0.25rem;
+}
+
+#app-root {
+  flex: 1;
+  padding: 1.5rem 1rem;
+  max-width: 900px;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.site-footer {
+  padding: 1rem;
+  text-align: center;
+  border-top: 1px solid #e8d5e3;
+  background: #fff;
+}
+
+.disclaimer {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+/* ============================================================
+   Phase 3 — Input Form
+   ============================================================ */
+
+/* ----- Card shell ----- */
+.input-card {
+  background: #fff;
+  border: 1px solid #e8d5e3;
+  border-radius: 14px;
+  padding: 1.75rem 1.5rem;
+  max-width: 480px;
+  margin-inline: auto;
+  box-shadow: 0 2px 12px rgba(180, 110, 160, 0.08);
+}
+
+.input-card__title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-accent-dark);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #f0e0ec;
+}
+
+/* ----- Individual field wrapper ----- */
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 1.25rem;
+}
+
+/* ----- Labels ----- */
+.field-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.field-required {
+  color: #b34d7d;
+  margin-left: 0.15rem;
+}
+
+.field-unit {
+  font-weight: 400;
+  color: var(--color-muted);
+  font-size: 0.85rem;
+  margin-left: 0.2rem;
+}
+
+/* ----- Inputs ----- */
+.field-input {
+  padding: 0.55rem 0.75rem;
+  border: 1.5px solid #d8c5d5;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--color-text);
+  background: #fdfbfd;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  width: 100%;
+}
+
+.field-input--short {
+  max-width: 120px;
+}
+
+.field-input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(201, 127, 168, 0.18);
+}
+
+/* Error state on input */
+.field-input.is-invalid {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px rgba(181, 38, 38, 0.12);
+}
+
+/* ----- Hint text ----- */
+.field-hint {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+}
+
+/* ----- Inline error message ----- */
+.field-error {
+  font-size: 0.82rem;
+  color: var(--color-error);
+  font-weight: 500;
+  min-height: 1.1em;
+  display: block;
+}
+
+.field-error:empty {
+  display: none;
+}
+
+/* ----- Submit button ----- */
+.btn-calculate {
+  display: block;
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.7rem 1rem;
+  background: linear-gradient(135deg, #c97fa8 0%, #a85d8a 100%);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+  letter-spacing: 0.01em;
+}
+
+.btn-calculate:hover {
+  opacity: 0.9;
+}
+
+.btn-calculate:active {
+  transform: scale(0.98);
+}
+
+.btn-calculate:focus-visible {
+  outline: 3px solid var(--color-accent-dark);
+  outline-offset: 2px;
+}
+
+/* ----- Privacy note (one-liner below Calculate button) ----- */
+.privacy-note {
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+/* ----- Clear saved data — ghost/secondary button ----- */
+.btn-clear {
+  display: block;
+  width: 100%;
+  margin-top: 0.4rem;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  color: var(--color-muted);
+  font-size: 0.8rem;
+  font-family: inherit;
+  border: 1px solid #d8c5d5;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  letter-spacing: 0.01em;
+}
+
+.btn-clear:hover {
+  background: #f9f0f5;
+  color: var(--color-text);
+  border-color: #c97fa8;
+}
+
+.btn-clear:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.btn-clear:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* ----- Responsive: wider screens ----- */
+@media (min-width: 520px) {
+  .input-card {
+    padding: 2rem 2.25rem;
+  }
+}
+
+/* ============================================================
+   Phase 4 — Calendar Section
+   ============================================================ */
+
+/* ----- Section wrapper (hidden until form submitted) ----- */
+.calendar-section {
+  margin-top: 2.5rem;
+}
+
+.calendar-section.hidden {
+  display: none;
+}
+
+.calendar-section__heading {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-accent-dark);
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid #e8d5e3;
+}
+
+/* ----- Calendar wrapper card ----- */
+.cal-wrapper {
+  background: #fff;
+  border: 1px solid #e8d5e3;
+  border-radius: 14px;
+  padding: 1.25rem 1rem;
+  box-shadow: 0 2px 12px rgba(180, 110, 160, 0.07);
+}
+
+/* ----- Header: prev / month-name / next ----- */
+.cal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  gap: 0.5rem;
+}
+
+.cal-month-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-accent-dark);
+  text-align: center;
+  flex: 1;
+}
+
+.cal-nav {
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  background: #fdf4f9;
+  border: 1.5px solid #d8c5d5;
+  border-radius: 8px;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--color-accent-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.cal-nav:hover {
+  background: #f0e0ec;
+  border-color: #c97fa8;
+}
+
+.cal-nav:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ----- 7-column grid ----- */
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+}
+
+/* Day-of-week header cells */
+.cal-dow {
+  text-align: center;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+  padding: 0.3rem 0 0.5rem;
+}
+
+/* ----- Day cells ----- */
+.cal-day {
+  min-height: 42px;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  font-size: 0.82rem;
+  position: relative;
+  transition: filter 0.12s ease;
+}
+
+.cal-day--empty {
+  background: transparent;
+}
+
+/* Normal / no phase */
+.cal-day--normal {
+  background: #f7f3f8;
+  color: var(--color-text);
+}
+
+/* Period — soft rose-pink */
+.cal-day--period {
+  background: #f8c0cf;
+  color: #7a1a35;
+  font-weight: 600;
+}
+
+/* Fertile window — sage teal */
+.cal-day--fertile {
+  background: #a8d8c0;
+  color: #1a5c3a;
+  font-weight: 500;
+}
+
+/* Peak days — deep teal, high contrast (5.4:1 with white — passes WCAG AA) */
+.cal-day--peak {
+  background: #1a7055;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* PMS window — warm amber */
+.cal-day--pms {
+  background: #f7dc8a;
+  color: #5c3f06;
+  font-weight: 500;
+}
+
+/* Today ring — works on any background */
+.cal-day--today {
+  outline: 2.5px solid var(--color-accent-dark);
+  outline-offset: -2px;
+  border-radius: 7px;
+}
+
+/* ----- Day number ----- */
+.cal-day-num {
+  font-size: 0.82rem;
+  line-height: 1;
+}
+
+/* ----- Badge icons (● ovulation, ★ peak) ----- */
+.cal-badge {
+  font-size: 0.55rem;
+  line-height: 1;
+  display: block;
+}
+
+.cal-badge--ovulation {
+  color: #e0f5ed;        /* soft white-teal on dark background */
+}
+
+.cal-badge--peak {
+  color: #c8eed9;        /* muted star on dark teal */
+}
+
+/* Phase-shape badges for color-blind accessibility */
+.cal-badge--period-a11y  { color: #7a1a35; font-size: 0.48rem; }
+.cal-badge--fertile-a11y { color: #1a5c3a; font-size: 0.48rem; }
+.cal-badge--pms-a11y     { color: #5c3f06; font-size: 0.48rem; }
+
+/* ----- Legend ----- */
+.cal-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.1rem;
+  margin-top: 1.1rem;
+  padding: 0.85rem 1rem;
+  background: #fdf8fb;
+  border: 1px solid #eadcee;
+  border-radius: 9px;
+}
+
+.cal-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.8rem;
+  color: var(--color-text);
+}
+
+.cal-legend-item em {
+  color: var(--color-muted);
+  font-style: normal;
+  font-size: 0.75rem;
+}
+
+.cal-legend-swatch {
+  width: 13px;
+  height: 13px;
+  border-radius: 4px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.cal-legend-swatch--period  { background: #f8c0cf; border: 1px solid #c8809a; }
+.cal-legend-swatch--fertile { background: #a8d8c0; border: 1px solid #68a888; }
+.cal-legend-swatch--peak    { background: #1a7055; border: 1px solid #0d4c33; }
+.cal-legend-swatch--pms     { background: #f7dc8a; border: 1px solid #c8a840; }
+
+/* Symbol next to legend label text */
+.cal-legend-symbol {
+  font-size: 0.7em;
+  margin-left: 0.1em;
+  opacity: 0.8;
+}
+
+/* ----- Responsive: wider screens get bigger cells ----- */
+@media (min-width: 520px) {
+  .cal-wrapper {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .cal-day {
+    min-height: 50px;
+    font-size: 0.88rem;
+  }
+
+  .cal-day-num {
+    font-size: 0.88rem;
+  }
+
+  .cal-badge {
+    font-size: 0.62rem;
+  }
+}
+
+@media (min-width: 700px) {
+  .cal-day {
+    min-height: 58px;
+  }
+}
+
+/* ----- Very small phones (≤360px): tighten calendar padding ----- */
+@media (max-width: 360px) {
+  #app-root {
+    padding: 1rem 0.5rem;
+  }
+
+  .input-card {
+    padding: 1.25rem 1rem;
+  }
+
+  .cal-wrapper {
+    padding: 0.75rem 0.4rem;
+  }
+
+  .cal-grid {
+    gap: 2px;
+  }
+
+  .cal-day {
+    min-height: 36px;
+    font-size: 0.72rem;
+    border-radius: 5px;
+  }
+
+  .cal-day-num {
+    font-size: 0.72rem;
+  }
+
+  .cal-badge {
+    font-size: 0.42rem;
+  }
+
+  .cal-dow {
+    font-size: 0.58rem;
+  }
+}
+
+/* ============================================================
+   Phase 5 — Two-column layout (calendar + info panel)
+   ============================================================ */
+
+/* ----- Flex wrapper: stacked on mobile, row on wider screens ----- */
+.cal-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Calendar takes all available width by default */
+.cal-layout__grid {
+  flex: 1;
+  min-width: 0; /* prevent grid from overflowing flex parent */
+}
+
+/* Info panel sits below the calendar on mobile */
+.cal-layout__info {
+  /* width set explicitly on wider screens */
+}
+
+/* Side-by-side at ≥ 640 px */
+@media (min-width: 640px) {
+  .cal-layout {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .cal-layout__info {
+    width: 265px;
+    flex-shrink: 0;
+  }
+}
+
+/* ============================================================
+   Phase 5 — Info Panel Card
+   ============================================================ */
+
+.info-panel__card {
+  background: #fff;
+  border: 1px solid #e8d5e3;
+  border-radius: 14px;
+  padding: 1.25rem 1.1rem;
+  box-shadow: 0 2px 12px rgba(180, 110, 160, 0.07);
+}
+
+/* ----- Card title ----- */
+.info-panel__title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--color-accent-dark);
+  margin-bottom: 1rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid #f0e0ec;
+}
+
+/* ----- Info rows (icon + content) ----- */
+.info-panel__row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  margin-bottom: 0.85rem;
+}
+
+.info-panel__row:last-of-type {
+  margin-bottom: 0;
+}
+
+.info-panel__icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  width: 1.3rem;
+  text-align: center;
+  line-height: 1.6; /* align with label text */
+}
+
+/* ----- Label / value / note ----- */
+.info-panel__label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-muted);
+  margin-bottom: 0.1rem;
+}
+
+.info-panel__value {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.4;
+}
+
+.info-panel__note {
+  font-size: 0.72rem;
+  color: var(--color-muted);
+  font-style: italic;
+  margin-top: 0.1rem;
+}
+
+/* Peak row — value gets the deep teal colour to match the calendar cells */
+.info-panel__row--peak .info-panel__value {
+  color: #1a7055;
+}
+
+/* ----- Empty state ----- */
+.info-panel__empty {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  padding: 1rem;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #e8d5e3;
+  border-radius: 14px;
+}
+
+/* ----- Inline disclaimer at bottom of card ----- */
+.info-panel__disclaimer {
+  margin-top: 1rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid #f0e0ec;
+  font-size: 0.71rem;
+  color: var(--color-muted);
+  line-height: 1.55;
+}
+
+.info-panel__disclaimer strong {
+  color: #5a3a5a; /* slightly darker mauve — readable but not alarming */
+  font-weight: 600;
+}
