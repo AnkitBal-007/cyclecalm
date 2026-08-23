@@ -1,6 +1,6 @@
-# CycleCalm — Period, Ovulation & PMS Calendar
+# Bloom — Period, Ovulation & PMS Calendar
 
-CycleCalm is a fully static, client-side web app that helps you track your menstrual cycle. Enter the first day of your last period, your average cycle length, and your typical period duration; the app projects six future cycles onto a monthly calendar, highlighting:
+Bloom is a fully static, client-side web app that helps you track your menstrual cycle. Enter the first day of your last period, your average cycle length, and your typical period duration; the app projects six future cycles onto a monthly calendar, highlighting:
 
 - **Period days** (rose-pink ◆)
 - **Fertile window** (sage teal ◇), with **peak days** (deep teal ★●) flagged as the best days for conception
